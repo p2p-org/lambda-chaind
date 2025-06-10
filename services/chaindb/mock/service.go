@@ -596,6 +596,46 @@ func (s *service) Withdrawals(_ context.Context, _ *chaindb.WithdrawalFilter) ([
 	return []*chaindb.Withdrawal{}, nil
 }
 
+// ConsolidationRequests provides consolidation requests according to the filter.
+func (s *service) ConsolidationRequests(_ context.Context, _ *chaindb.ConsolidationRequestFilter) ([]*chaindb.ConsolidationRequest, error) {
+	return []*chaindb.ConsolidationRequest{}, nil
+}
+
+// SetConsolidationRequests sets multiple consolidation requests.
+func (s *service) SetConsolidationRequests(_ context.Context, _ []*chaindb.ConsolidationRequest) error {
+	return nil
+}
+
+// SetConsolidationRequest sets a consolidation request.
+func (s *service) SetConsolidationRequest(_ context.Context, _ *chaindb.ConsolidationRequest) error {
+	return nil
+}
+
+// DepositRequests provides deposit requests according to the filter.
+func (s *service) DepositRequests(_ context.Context, _ *chaindb.DepositRequestFilter) ([]*chaindb.DepositRequest, error) {
+	return []*chaindb.DepositRequest{}, nil
+}
+
+// SetDepositRequests sets multiple deposit requests.
+func (s *service) SetDepositRequests(_ context.Context, _ []*chaindb.DepositRequest) error {
+	return nil
+}
+
+// SetDepositRequest sets a deposit request.
+func (s *service) SetDepositRequest(_ context.Context, _ *chaindb.DepositRequest) error {
+	return nil
+}
+
+// SetWithdrawalRequests sets multiple withdrawal requests.
+func (s *service) SetWithdrawalRequests(_ context.Context, _ []*chaindb.WithdrawalRequest) error {
+	return nil
+}
+
+// SetWithdrawalRequest sets a withdrawal request.
+func (s *service) SetWithdrawalRequest(_ context.Context, _ *chaindb.WithdrawalRequest) error {
+	return nil
+}
+
 // BeginTx begins a transaction.
 func (s *service) BeginTx(_ context.Context) (context.Context, context.CancelFunc, error) {
 	return nil, nil, nil

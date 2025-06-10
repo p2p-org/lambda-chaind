@@ -1,3 +1,6 @@
+0.9.2:
+  - add provider functions for consolidation and deposit requests
+
 0.9.1:
   - add commit hash to startup
   - warn if blobs are no longer available in the beacon node for a block, but continue

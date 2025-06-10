@@ -367,3 +367,67 @@ type WithdrawalFilter struct {
 	// If nil then no filter is applied.
 	Canonical *bool
 }
+
+// ConsolidationRequestFilter defines a filter for fetching consolidation requests.
+// Filter elements are ANDed together.
+// Results are always returned in ascending (slot,index) order.
+type ConsolidationRequestFilter struct {
+	// Limit is the maximum number of items to return.
+	Limit uint32
+
+	// Order is either OrderEarliest, in which case the earliest results
+	// that match the filter are returned, or OrderLatest, in which case the
+	// latest results that match the filter are returned.
+	// The default is OrderEarliest.
+	Order Order
+
+	// From is the earliest slot from which to fetch items.
+	// If nil then there is no earliest slot.
+	From *phase0.Slot
+
+	// To is the latest slot to which to fetch items.
+	// If nil then there is no latest slot.
+	To *phase0.Slot
+
+	// SourcePubkeys is the list of source validator public keys for which to obtain items.
+	// If nil then no filter is applied.
+	SourcePubkeys []phase0.BLSPubKey
+
+	// TargetPubkeys is the list of target validator public keys for which to obtain items.
+	// If nil then no filter is applied.
+	TargetPubkeys []phase0.BLSPubKey
+
+	// BlockRoots is the list of block roots for which to obtain items.
+	// If nil then no filter is applied.
+	BlockRoots []phase0.Root
+}
+
+// DepositRequestFilter defines a filter for fetching deposit requests.
+// Filter elements are ANDed together.
+// Results are always returned in ascending (slot,index) order.
+type DepositRequestFilter struct {
+	// Limit is the maximum number of items to return.
+	Limit uint32
+
+	// Order is either OrderEarliest, in which case the earliest results
+	// that match the filter are returned, or OrderLatest, in which case the
+	// latest results that match the filter are returned.
+	// The default is OrderEarliest.
+	Order Order
+
+	// From is the earliest slot from which to fetch items.
+	// If nil then there is no earliest slot.
+	From *phase0.Slot
+
+	// To is the latest slot to which to fetch items.
+	// If nil then there is no latest slot.
+	To *phase0.Slot
+
+	// ValidatorPubkeys is the list of validator public keys for which to obtain items.
+	// If nil then no filter is applied.
+	ValidatorPubkeys []phase0.BLSPubKey
+
+	// BlockRoots is the list of block roots for which to obtain items.
+	// If nil then no filter is applied.
+	BlockRoots []phase0.Root
+}

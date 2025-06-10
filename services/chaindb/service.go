@@ -165,6 +165,12 @@ type ChainSpecSetter interface {
 	SetChainSpecValue(ctx context.Context, key string, value any) error
 }
 
+// ConsolidationRequestsProvider defines functions to access consolidation requests.
+type ConsolidationRequestsProvider interface {
+	// ConsolidationRequests provides consolidation requests according to the filter.
+	ConsolidationRequests(ctx context.Context, filter *ConsolidationRequestFilter) ([]*ConsolidationRequest, error)
+}
+
 // ConsolidationRequestsSetter defines functions to create and update consolidation requests.
 type ConsolidationRequestsSetter interface {
 	// SetConsolidationRequests sets consolidation requests.
@@ -172,6 +178,12 @@ type ConsolidationRequestsSetter interface {
 
 	// SetConsolidationRequest sets or updates a consolidation request.
 	SetConsolidationRequest(ctx context.Context, request *ConsolidationRequest) error
+}
+
+// DepositRequestsProvider defines functions to access deposit requests.
+type DepositRequestsProvider interface {
+	// DepositRequests provides deposit requests according to the filter.
+	DepositRequests(ctx context.Context, filter *DepositRequestFilter) ([]*DepositRequest, error)
 }
 
 // DepositRequestsSetter defines functions to create and update deposit requests.
