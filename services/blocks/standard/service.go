@@ -17,7 +17,8 @@ import (
 	"context"
 
 	eth2client "github.com/attestantio/go-eth2-client"
-	api "github.com/attestantio/go-eth2-client/api/v1"
+	"github.com/attestantio/go-eth2-client/api"
+	apiv1 "github.com/attestantio/go-eth2-client/api/v1"
 	"github.com/attestantio/go-eth2-client/spec/phase0"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
@@ -194,13 +195,11 @@ func (s *Service) updateAfterRestart(ctx context.Context, startSlot int64) {
 	log.Info().Msg("Caught up")
 
 	// Set up the handler for new chain head updates.
-	if err := s.eth2Client.(eth2client.EventsProvider).Events(ctx, []string{"head"}, func(event *api.Event) {
-		if event.Data == nil {
-			// Happens when the channel shuts down, nothing to worry about.
-			return
-		}
-		eventData := event.Data.(*api.HeadEvent)
-		s.OnBeaconChainHeadUpdated(ctx, eventData.Slot, eventData.Block, eventData.State, eventData.EpochTransition)
+	if err := s.eth2Client.(eth2client.EventsProvider).Events(ctx, &api.EventsOpts{
+		Topics: []string{"head"},
+		HeadHandler: func(ctx context.Context, event *apiv1.HeadEvent) {
+			s.OnBeaconChainHeadUpdated(ctx, event.Slot, event.Block, event.State, event.EpochTransition)
+		},
 	}); err != nil {
 		log.Fatal().Err(err).Msg("Failed to add beacon chain head updated handler")
 	}
