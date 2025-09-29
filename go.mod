@@ -5,7 +5,7 @@ go 1.22.7
 toolchain go1.23.2
 
 require (
-	github.com/attestantio/go-eth2-client v0.26.1-0.20250829122455-ff89a2135a43
+	github.com/attestantio/go-eth2-client v0.27.1
 	github.com/aws/aws-sdk-go v1.55.6
 	github.com/jackc/pgx-shopspring-decimal v0.0.0-20220624020537-1d36b5a1853e
 	github.com/jackc/pgx-zerolog v0.0.0-20230315001418-f978528409eb

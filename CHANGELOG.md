@@ -1,3 +1,7 @@
+0.10.0:
+  - support fulu
+  - use updated event handlers from go-eth2-client
+
 0.9.2:
   - add provider functions for consolidation and deposit requests
 
