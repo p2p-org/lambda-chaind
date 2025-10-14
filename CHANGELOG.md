@@ -1,5 +1,5 @@
 0.10.1:
-  - fix fulu support
+  - fix block handlers for fulu block event
 
 0.10.0:
   - support fulu
