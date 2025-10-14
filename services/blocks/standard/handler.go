@@ -43,7 +43,7 @@ func (s *Service) OnBeaconChainHeadUpdated(
 	slot phase0.Slot,
 	blockRoot phase0.Root,
 	stateRoot phase0.Root,
-	// skipcq: RVV-A0005
+// skipcq: RVV-A0005
 	epochTransition bool,
 ) {
 	ctx, span := otel.Tracer("wealdtech.chaind.services.blocks.standard").Start(ctx, "OnBeaconChainHeadUpdated",
@@ -194,6 +194,8 @@ func (s *Service) OnBlock(ctx context.Context, signedBlock *spec.VersionedSigned
 		return s.onBlockDeneb(ctx, signedBlock.Deneb, dbBlock)
 	case spec.DataVersionElectra:
 		return s.onBlockElectra(ctx, signedBlock.Electra, dbBlock)
+	case spec.DataVersionFulu:
+		return s.onBlockElectra(ctx, signedBlock.Fulu, dbBlock)
 	case spec.DataVersionUnknown:
 		return errors.New("unknown block version")
 	default:
@@ -757,6 +759,8 @@ func (s *Service) dbBlock(
 		return s.dbBlockDeneb(ctx, block.Deneb.Message)
 	case spec.DataVersionElectra:
 		return s.dbBlockElectra(ctx, block.Electra.Message)
+	case spec.DataVersionFulu:
+		return s.dbBlockElectra(ctx, block.Fulu.Message)
 	case spec.DataVersionUnknown:
 		return nil, errors.New("unknown block version")
 	default:
