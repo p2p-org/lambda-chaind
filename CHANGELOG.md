@@ -1,3 +1,6 @@
+0.10.1:
+  - fix block handlers for fulu block event
+
 0.10.0:
   - support fulu
   - use updated event handlers from go-eth2-client
