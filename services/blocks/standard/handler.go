@@ -714,6 +714,10 @@ func (s *Service) updateBlobSidecarsForBlock(ctx context.Context,
 	ctx, span := otel.Tracer("wealdtech.chaind.services.blocks.standard").Start(ctx, "updateBlobSidecarsForBlock")
 	defer span.End()
 
+	if !s.blobEnable {
+		return nil
+	}
+
 	response, err := s.eth2Client.(eth2client.BlobSidecarsProvider).BlobSidecars(ctx, &api.BlobSidecarsOpts{
 		Block: blockRoot.String(),
 	})

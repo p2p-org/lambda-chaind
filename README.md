@@ -203,6 +203,9 @@ blocks:
   # refetch will refetch block data from a beacon node even if it has already has a block
   # in its database.
   # refetch: false
+  # blob.enable will fetch and save blobs for block
+  blob:
+    enable: true
 # validators contains configuration for obtaining validator-related information.
 validators:
   enable: true
