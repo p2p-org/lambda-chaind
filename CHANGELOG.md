@@ -1,3 +1,6 @@
+0.10.2:
+  - added `blocks.blobs.enable` configuration flag (default: true) to control whether blobs for blocks should be fetched and saved
+
 0.10.1:
   - fix block handlers for fulu block event
 

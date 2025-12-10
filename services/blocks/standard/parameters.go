@@ -32,7 +32,7 @@ type parameters struct {
 	chainTime   chaintime.Service
 	startSlot   int64
 	refetch     bool
-	blobEnable  bool
+	blobsSaving bool
 	activitySem *semaphore.Weighted
 }
 
@@ -96,10 +96,10 @@ func WithRefetch(refetch bool) Parameter {
 	})
 }
 
-// WithBlobEnable sets the blobEnable flag for this module.
-func WithBlobEnable(blobEnable bool) Parameter {
+// WithBlobsSaving sets the blobsSaving flag for this module.
+func WithBlobsSaving(blobsSaving bool) Parameter {
 	return parameterFunc(func(p *parameters) {
-		p.blobEnable = blobEnable
+		p.blobsSaving = blobsSaving
 	})
 }
 

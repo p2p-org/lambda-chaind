@@ -714,7 +714,7 @@ func (s *Service) updateBlobSidecarsForBlock(ctx context.Context,
 	ctx, span := otel.Tracer("wealdtech.chaind.services.blocks.standard").Start(ctx, "updateBlobSidecarsForBlock")
 	defer span.End()
 
-	if !s.blobEnable {
+	if !s.blobsSaving {
 		return nil
 	}
 
