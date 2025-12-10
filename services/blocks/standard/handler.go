@@ -711,12 +711,12 @@ func (s *Service) updateSyncAggregateForBlock(ctx context.Context,
 func (s *Service) updateBlobSidecarsForBlock(ctx context.Context,
 	blockRoot phase0.Root,
 ) error {
-	ctx, span := otel.Tracer("wealdtech.chaind.services.blocks.standard").Start(ctx, "updateBlobSidecarsForBlock")
-	defer span.End()
-
-	if !s.blobsSaving {
+    if !s.blobsSaving {
 		return nil
 	}
+
+	ctx, span := otel.Tracer("wealdtech.chaind.services.blocks.standard").Start(ctx, "updateBlobSidecarsForBlock")
+	defer span.End()
 
 	response, err := s.eth2Client.(eth2client.BlobSidecarsProvider).BlobSidecars(ctx, &api.BlobSidecarsOpts{
 		Block: blockRoot.String(),
