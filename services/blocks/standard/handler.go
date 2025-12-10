@@ -711,7 +711,7 @@ func (s *Service) updateSyncAggregateForBlock(ctx context.Context,
 func (s *Service) updateBlobSidecarsForBlock(ctx context.Context,
 	blockRoot phase0.Root,
 ) error {
-    if !s.blobsSaving {
+	if !s.blobsSaving {
 		return nil
 	}
 
