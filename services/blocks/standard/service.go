@@ -47,6 +47,7 @@ type Service struct {
 	consolidationRequestsSetter chaindb.ConsolidationRequestsSetter
 	chainTime                   chaintime.Service
 	refetch                     bool
+	blobsSaving                 bool
 	lastHandledBlockRoot        phase0.Root
 	activitySem                 *semaphore.Weighted
 	syncCommittees              map[uint64]*chaindb.SyncCommittee
@@ -152,10 +153,16 @@ func New(ctx context.Context, params ...Parameter) (*Service, error) {
 		consolidationRequestsSetter: consolidationRequestsSetter,
 		chainTime:                   parameters.chainTime,
 		refetch:                     parameters.refetch,
+		blobsSaving:                 parameters.blobsSaving,
 		activitySem:                 parameters.activitySem,
 		syncCommittees:              make(map[uint64]*chaindb.SyncCommittee),
 	}
 
+	log.Trace().
+		Bool("blobsSaving", parameters.blobsSaving).
+		Bool("refetch", parameters.refetch).
+		Int64("startSlot", parameters.startSlot).
+		Msg("Blocks Service initialized")
 	// Note the current highest processed block for the monitor.
 	md, err := s.getMetadata(ctx)
 	if err != nil {

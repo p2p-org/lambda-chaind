@@ -711,6 +711,10 @@ func (s *Service) updateSyncAggregateForBlock(ctx context.Context,
 func (s *Service) updateBlobSidecarsForBlock(ctx context.Context,
 	blockRoot phase0.Root,
 ) error {
+	if !s.blobsSaving {
+		return nil
+	}
+
 	ctx, span := otel.Tracer("wealdtech.chaind.services.blocks.standard").Start(ctx, "updateBlobSidecarsForBlock")
 	defer span.End()
 
