@@ -388,6 +388,12 @@ type ValidatorBalancesPruner interface {
 	PruneValidatorBalances(ctx context.Context, to phase0.Epoch, retain []phase0.BLSPubKey) error
 }
 
+// ValidatorBalancesDeleter defines functions to delete validator balances for a specific epoch.
+type ValidatorBalancesDeleter interface {
+	// DeleteValidatorBalancesByEpoch deletes all validator balances for the given epoch.
+	DeleteValidatorBalancesByEpoch(ctx context.Context, epoch phase0.Epoch) error
+}
+
 // ValidatorsSetter defines functions to create and update validator information.
 type ValidatorsSetter interface {
 	// SetValidator sets a validator.

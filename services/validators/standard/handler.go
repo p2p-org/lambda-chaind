@@ -219,6 +219,13 @@ func (s *Service) onEpochTransitionValidatorBalancesForEpoch(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "failed to begin transaction for validator balances")
 	}
+	// Delete existing balances for this epoch before COPY to prevent duplicates.
+	// Replaces the dropped unique index (i_validator_balances_1) as duplicate protection.
+	// Uses i_validator_balances_2 (f_epoch index) for fast lookup.
+	if err := s.chainDB.(chaindb.ValidatorBalancesDeleter).DeleteValidatorBalancesByEpoch(dbCtx, epoch); err != nil {
+		cancel()
+		return errors.Wrap(err, "failed to delete existing validator balances for epoch")
+	}
 	if s.balances {
 		dbValidatorBalances := make([]*chaindb.ValidatorBalance, 0, len(validators))
 		for index, validator := range validators {
