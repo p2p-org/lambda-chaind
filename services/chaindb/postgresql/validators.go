@@ -759,3 +759,17 @@ WHERE f_epoch <= $1`)
 
 	return err
 }
+
+// DeleteValidatorBalancesByEpoch deletes all validator balances for the given epoch.
+func (s *Service) DeleteValidatorBalancesByEpoch(ctx context.Context, epoch phase0.Epoch) error {
+	ctx, span := otel.Tracer("wealdtech.chaind.services.chaindb.postgresql").Start(ctx, "DeleteValidatorBalancesByEpoch")
+	defer span.End()
+
+	tx := s.tx(ctx)
+	if tx == nil {
+		return ErrNoTransaction
+	}
+
+	_, err := tx.Exec(ctx, "DELETE FROM t_validator_balances WHERE f_epoch = $1", epoch)
+	return err
+}
