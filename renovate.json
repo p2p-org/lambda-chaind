@@ -1,7 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "enabledManagers": ["github-actions"],
-  "rebaseWhen": "conflicted",
-  "labels": ["dependencies"],
-  "pinDigests": true
+  "enabled": false
 }
